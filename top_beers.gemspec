@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'top_beers/version'
+require 'top-beers/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "top_beers"
   spec.version       = TopBeers::VERSION
-  spec.authors       = ["TODO: Write your name"]
-  spec.email         = ["TODO: Write your email address"]
+  spec.authors       = ["BJ Cantlupe"]
+  spec.email         = ["bjcantlupe@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{A CLI app for the world's top beers}
+  spec.description   = %q{This app scrapes from Beer Advocates website to display the world's top 250 beers. The user can interact with the CLI to learn more information about each beer, including detailed descriptions, brewery information and ABV.}
+  spec.homepage      = "https://github.com/BeejLuig/top-beers-cli-app"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
