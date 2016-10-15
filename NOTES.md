@@ -8,3 +8,7 @@ Avi's How to Build a CLI Gem
 6. Start making things real
 7. Discover objects
 8. Program
+
+
+Reference
+# here doc - http://blog.jayfields.com/2006/12/ruby-multiline-strings-here-doc-or.html
