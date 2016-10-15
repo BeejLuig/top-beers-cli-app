@@ -1,4 +1,5 @@
 class TopBeers::Beer
+  attr_accessor :name, :style, :abv, :brewery, :url, :ba_score
 
   def self.beerlist
     puts <<-DOC.gsub /^\s*/, ''
@@ -34,5 +35,6 @@ class TopBeers::Beer
     beer_3.url = "https://www.beeradvocate.com/beer/profile/23222/76421/"
     beer_3.ba_score = "100"
 
+    [beer_1, beer_2, beer_3]
   end
 end
