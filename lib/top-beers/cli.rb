@@ -1,11 +1,12 @@
 class TopBeers::CLI
   def call
-    puts "Beer Advocate's Best Beers in the World"
     list_beers
     menu
+    goodbye
   end
 
   def list_beers
+    puts "Beer Advocate's Best Beers in the World"
     puts <<-DOC.gsub /^\s*/, ''
       1. Good Morning - Tree House Brewing Company
       American Double / Imperial Stout / 8.40% ABV
@@ -20,5 +21,21 @@ class TopBeers::CLI
   end
 
   def menu
+    puts "Enter the number of the beer you want more information about or type exit to leave the program"
+    input = nil
+    while input != "exit"
+      input = gets.strip.downcase
+      case input
+      when "1"
+        puts "More info on beer 1..."
+      when "2"
+        puts "More info on beer 1..."
+      when "3"
+        puts "More info on beer 1..."
+    end
+  end
+
+  def goodbye
+    puts "Thanks for using TopBeers!"
   end
 end
