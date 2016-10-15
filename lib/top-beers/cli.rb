@@ -1,4 +1,6 @@
 class TopBeers::CLI
+  attr_accessor :beers
+
   def call
     list_beers
     menu
@@ -7,7 +9,10 @@ class TopBeers::CLI
 
   def list_beers
     puts "Beer Advocate's Best Beers in the World"
-    TopBeers::Beer.beerlist
+    @beers = TopBeers::Beer.beerlist
+    @beers.each.with_index(1) do |beer, i|
+      puts "#{i}. #{beer.name} - #{beer.brewery} \n   #{beer.style} / #{beer.abv} ABV"
+    end
   end
 
   def menu
@@ -15,16 +20,12 @@ class TopBeers::CLI
     while input != "exit"
       puts "Enter the number of the beer you want more information about or type list to see the beer list again or type exit to leave the program"
       input = gets.strip.downcase
-      case input
-      when "1"
-        puts "More info on beer 1..."
-      when "2"
-        puts "More info on beer 2..."
-      when "3"
-        puts "More info on beer 3..."
-      when "list"
+
+      if input.to_i > 0
+        puts @beers[input.to_i - 1]
+      elsif input == "list"
         list_beers
-      when "exit"
+      elsif input == "exit"
       else
         puts "Not sure what you want. Type list or exit."
       end
