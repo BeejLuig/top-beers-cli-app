@@ -65,7 +65,7 @@ has a name
 has a style
 has an ABV
 has a brewery
-has a rating
+has a ba_score
 has a url
 
 #Reference
