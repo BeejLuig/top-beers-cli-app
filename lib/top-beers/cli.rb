@@ -2,6 +2,7 @@ class TopBeers::CLI
   attr_accessor :beers
 
   def call
+    TopBeers::Scraper.scrape_beers
     list_beers
     menu
     goodbye
@@ -9,9 +10,9 @@ class TopBeers::CLI
 
   def list_beers
     puts "Beer Advocate's Best Beers in the World"
-    @beers = TopBeers::Beer.beerlist
+    @beers = TopBeers::Beer.all
     @beers.each.with_index(1) do |beer, i|
-      puts "#{i}. #{beer.name} - #{beer.brewery} \n   #{beer.style} / #{beer.abv} ABV"
+      puts "#{i}. #{beer.name} - #{beer.brewery} \n  #{beer.style} / #{beer.abv} ABV"
     end
   end
 

@@ -72,6 +72,7 @@ has a url
 here doc - http://blog.jayfields.com/2006/12/ruby-multiline-strings-here-doc-or.html
 
 #Clipboard (for later use)
+
 puts <<-DOC.gsub /^\s*/, ''
   1. Good Morning - Tree House Brewing Company
   American Double / Imperial Stout / 8.40% ABV
@@ -83,3 +84,41 @@ puts <<-DOC.gsub /^\s*/, ''
   American Double / Imperial Stout / 12.00% ABV
 
 DOC
+
+#######################################################
+
+beer_1 = self.new
+beer_1.name = "Good Morning"
+beer_1.style = "American Double / Imperial Stout"
+beer_1.abv = "8.40%"
+beer_1.brewery = "Tree House Brewing Company"
+beer_1.url = "https://www.beeradvocate.com/beer/profile/28743/136936/"
+beer_1.ba_score = "100"
+
+beer_2 = self.new
+beer_2.name = "Kentucky Brunch Brand Stout"
+beer_2.style = "American Double / Imperial Stout"
+beer_2.abv = "12.00%"
+beer_2.brewery = "Toppling Goliath Brewing Company"
+beer_2.url = "https://www.beeradvocate.com/beer/profile/23222/78820/"
+beer_2.ba_score = "100"
+
+beer_3 = self.new
+beer_3.name = "Mornin' Delight"
+beer_3.style = "American Double / Imperial Stout"
+beer_3.abv = "12.00%"
+beer_3.brewery = "Toppling Goliath Brewing Company"
+beer_3.url = "https://www.beeradvocate.com/beer/profile/23222/76421/"
+beer_3.ba_score = "100"
+
+##
+beers = doc.search(".hr_bottom_light[@align='left']")
+beers.each.with_index do |beer, i|
+  if i.even?
+    new_beer = TopBeers::Beer.new
+    new_beer.url = beers[i].children[0].attributes["href"].value
+    new_beer.name = beers[i].css("b").text
+    new_beer.brewery = beers[i].css("#extendedInfo a")[0].text
+    new_beer.style = beers[i].css("#extendedInfo a")[1].text
+    new_beer.abv = beers[i].css("#extendedInfo").children[3].text[3, 10]
+##
