@@ -19,6 +19,8 @@ class TopBeers::Brewery
   end
 
   def show_beers
+    puts "#{@name}'s Beers in the Top 250"
+    puts "-"*"#{@name}'s Beers in the Top 250".length
     @beers.each.with_index(1) do |beer, i|
       puts "#{i}. ".colorize(:light_yellow)+"#{beer.name} - #{beer.style}".colorize(:light_green)
     end

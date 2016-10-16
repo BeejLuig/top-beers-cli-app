@@ -5,17 +5,16 @@ class TopBeers::CLI
     TopBeers::Scraper.scrape_beers
     @beers = TopBeers::Beer.all
     @breweries = TopBeers::Brewery.all
-    puts "#######################################".colorize(:yellow)
-    puts "Beer Advocate's Best Beers in the World".colorize(:light_yellow)
-    puts "#######################################".colorize(:yellow)
     list_beers
     menu
     goodbye
   end
 
   def list_beers
+    puts "Beer Advocate's Best Beers in the World".colorize(:light_yellow)
+    puts "---------------------------------------".colorize(:yellow)
     @beers.each.with_index(1) do |beer, i|
-      puts "#{i}. ".colorize(:light_yellow)+"#{beer.name} #{beer.brewery.name} - #{beer.style}".colorize(:light_green)
+      puts "#{i}. ".colorize(:light_yellow)+"#{beer.name} - #{beer.brewery.name} - #{beer.style}".colorize(:light_green)
     end
     puts "\n"
   end
