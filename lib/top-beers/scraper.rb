@@ -13,10 +13,9 @@ class TopBeers::Scraper
     i = 0
     beers.each do |beer|
       if i.even?
-        new_beer = TopBeers::Beer.new
+        new_beer = TopBeers::Beer.new(beer.css("b").text)
         new_beer.url = beer.children[0].attributes['href'].value
-        new_beer.name = beer.css("b").text
-        new_beer.brewery = beer.css("#extendedInfo a")[0].text
+        new_beer.brewery = TopBeers::Brewery.find_or_create_by_name(beer.css("#extendedInfo a")[0].text)
         new_beer.style = beer.css("#extendedInfo a")[1].text
         if beer.css("#extendedInfo").children[3] != nil
           new_beer.abv = beer.css("#extendedInfo").children[3].text[3, 10].chomp(" ABV")

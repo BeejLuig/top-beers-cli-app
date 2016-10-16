@@ -1,8 +1,10 @@
 require 'open-uri'
 require 'nokogiri'
 require 'pry'
+require 'colorize'
 
 require_relative './top-beers/version'
 require_relative './top-beers/beer'
 require_relative './top-beers/cli'
 require_relative './top-beers/scraper'
+require_relative './top-beers/brewery'

@@ -68,6 +68,12 @@ has a brewery
 has a ba_score
 has a url
 
+#Brewery class
+has a name
+has a location
+has a website
+has many beers
+
 #Reference
 here doc - http://blog.jayfields.com/2006/12/ruby-multiline-strings-here-doc-or.html
 

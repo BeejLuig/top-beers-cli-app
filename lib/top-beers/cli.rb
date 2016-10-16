@@ -9,24 +9,29 @@ class TopBeers::CLI
   end
 
   def list_beers
-    puts "Beer Advocate's Best Beers in the World"
+    puts "#######################################".colorize(:yellow)
+    puts "Beer Advocate's Best Beers in the World".colorize(:light_yellow)
+    puts "#######################################".colorize(:yellow)
     @beers = TopBeers::Beer.all
     @beers.each.with_index(1) do |beer, i|
-      puts "#{i}. #{beer.name} - #{beer.brewery} \n  #{beer.style} / #{beer.abv} ABV"
+      puts "#{i}.".colorize(:light_yellow)+"#{beer.name} #{beer.brewery} - #{beer.style}".colorize(:light_green)
     end
+    puts "\n"
   end
 
   def menu
     input = nil
     while input != "exit"
-      puts "Enter the number of the beer you want more information about or type list to see the beer list again or type exit to leave the program"
+      puts "Enter the number of the beer you want more information about. Type list to see the list again, or exit to quit."
       input = gets.strip.downcase
 
       if input.to_i > 0
         beer = @beers[input.to_i - 1]
-        TopBeers::Scraper.scrape_details(beer)
+        if beer.description.nil?
+          TopBeers::Scraper.scrape_details(beer)
+        end
         puts "#{beer.name} \n"
-        puts "Brewed by: #{beer.brewery} \n"
+        puts "Brewed by: #{beer.brewery.name} \n"
         puts "Style: #{beer.style} \n"
         puts "Alcohol by volume (ABV): #{beer.abv} \n"
         puts "Beer Advocate Score: #{beer.ba_score} \n"

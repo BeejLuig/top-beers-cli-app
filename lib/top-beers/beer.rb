@@ -3,7 +3,8 @@ class TopBeers::Beer
 
   @@all = []
 
-  def initialize
+  def initialize(name)
+    @name = name
     @@all << self
   end
 
