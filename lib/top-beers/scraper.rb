@@ -4,8 +4,13 @@ class TopBeers::Scraper
   def self.scrape_beers
     doc = Nokogiri::HTML(open("https://www.beeradvocate.com/lists/top/"))
     beers = doc.search(".hr_bottom_light[@align='left']")
-    i = 0
+    self.create_beers(beers)
+    beers
+  end
+
+  def self.create_beers(beers)
     beers.pop
+    i = 0
     beers.each do |beer|
       if i.even?
         new_beer = TopBeers::Beer.new
@@ -19,7 +24,5 @@ class TopBeers::Scraper
       end
       i += 1
     end
-    beers
   end
-
 end
