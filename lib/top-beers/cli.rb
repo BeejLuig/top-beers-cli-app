@@ -12,7 +12,7 @@ class TopBeers::CLI
     puts "Beer Advocate's Best Beers in the World"
     @beers = TopBeers::Beer.all
     @beers.each.with_index(1) do |beer, i|
-      puts "#{i}. #{beer.name} - #{beer.brewery} \n  #{beer.style} / #{beer.abv}"
+      puts "#{i}. #{beer.name} - #{beer.brewery} \n  #{beer.style} / #{beer.abv} ABV"
     end
   end
 

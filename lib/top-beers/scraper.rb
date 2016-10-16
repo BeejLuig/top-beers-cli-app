@@ -14,7 +14,7 @@ class TopBeers::Scraper
         new_beer.brewery = beer.css("#extendedInfo a")[0].text
         new_beer.style = beer.css("#extendedInfo a")[1].text
         if beer.css("#extendedInfo").children[3] != nil
-          new_beer.abv = beer.css("#extendedInfo").children[3].text[3, 10]
+          new_beer.abv = beer.css("#extendedInfo").children[3].text[3, 10].chomp(" ABV")
         end
       end
       i += 1
