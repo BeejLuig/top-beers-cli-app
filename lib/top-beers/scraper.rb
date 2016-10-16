@@ -30,7 +30,7 @@ class TopBeers::Scraper
     doc = Nokogiri::HTML(open("https://www.beeradvocate.com"+beer.url))
     beer.ba_score = doc.search(".ba-score").text
     beer.availability = doc.search(".break")[1].children[37].text.strip
-    beer.description = doc.search(".break")[1].children[44].text
+    beer.description = doc.search(".break")[1].children[44].text.gsub(/\n\t\t/, '')
   end
 end
 
