@@ -24,13 +24,14 @@ class TopBeers::CLI
 
       if input.to_i > 0
         beer = @beers[input.to_i - 1]
+        TopBeers::Scraper.scrape_details(beer)
         puts "#{beer.name} \n"
         puts "Brewed by: #{beer.brewery} \n"
         puts "Style: #{beer.style} \n"
         puts "Alcohol by volume (ABV): #{beer.abv} \n"
-        puts "Beer Advocate Score: 100 \n"
-        puts "Availability: Rotating \n"
-        puts "Description: \n Brewed with Monson’s own Maxwell Road Maple Grade A Dark Amber Maple syrup, Good Morning pours pitch black in the glass with a creamy mousse-like head. The bubbles give way to aromas of rich milk chocolate, cocoa powder, and dark amber maple syrup. The flavor starts as a blast of milk chocolate, sweet maple syrup, and rich fresh coffee as deeper complexities are uncovered as it warms. The crew here at Tree House tastes “chocolate covered maple candy”, “vanilla”, “chocolate cake”, “brown sugar”, and “fresh roasted coffee”. A super decadent treat, Good Morning begs to be shared and contemplated!"
+        puts "Beer Advocate Score: #{beer.ba_score} \n"
+        puts "Availability: #{beer.availability} \n"
+        puts "Description: \n#{beer.description}"
       elsif input == "list"
         list_beers
       elsif input == "exit"
