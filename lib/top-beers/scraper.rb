@@ -32,8 +32,8 @@ class TopBeers::Scraper
     beer.description = doc.search(".break")[1].children[44].text.gsub(/\n\t\t/, '')
 
     if beer.brewery.location.nil?
-      beer.brewery.location = "#{doc.search(".break")[1].children[15].text}, #{doc.search(".break")[1].children[17].text}"
-      beer.brewery.website = "doc.search(".break")[1].children[19].text"
+      beer.brewery.location = "#{doc.search('.break')[1].children[15].text}, #{doc.search(".break")[1].children[17].text}"
+      beer.brewery.website = "#{doc.search('.break')[1].children[19].text}"
     end
   end
 

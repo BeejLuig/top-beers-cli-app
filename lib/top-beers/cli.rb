@@ -1,9 +1,8 @@
 class TopBeers::CLI
-  attr_accessor :beers
+  attr_accessor :beers, :breweries
 
   def call
     TopBeers::Scraper.scrape_beers
-    binding.pry
     list_beers
     menu
     goodbye
@@ -14,8 +13,9 @@ class TopBeers::CLI
     puts "Beer Advocate's Best Beers in the World".colorize(:light_yellow)
     puts "#######################################".colorize(:yellow)
     @beers = TopBeers::Beer.all
+    @breweries = TopBeers::Brewery.all
     @beers.each.with_index(1) do |beer, i|
-      puts "#{i}.".colorize(:light_yellow)+"#{beer.name} #{beer.brewery.name} - #{beer.style}".colorize(:light_green)
+      puts "#{i}. ".colorize(:light_yellow)+"#{beer.name} #{beer.brewery.name} - #{beer.style}".colorize(:light_green)
     end
     puts "\n"
   end
@@ -33,11 +33,14 @@ class TopBeers::CLI
         end
         puts "#{beer.name} \n"
         puts "Brewed by: #{beer.brewery.name} \n"
+        puts "Location: #{beer.brewery.location}"
+        puts "Website: #{beer.brewery.website}"
         puts "Style: #{beer.style} \n"
         puts "Alcohol by volume (ABV): #{beer.abv} \n"
         puts "Beer Advocate Score: #{beer.ba_score} \n"
         puts "Availability: #{beer.availability} \n"
         puts "Description: \n#{beer.description}"
+        puts "\n"
       elsif input == "list"
         list_beers
       elsif input == "exit"
