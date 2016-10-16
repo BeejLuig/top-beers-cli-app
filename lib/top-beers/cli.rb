@@ -46,7 +46,7 @@ class TopBeers::CLI
       puts "Enter the number of the beer you want more information about.\nType list to see the list again, breweries for a list of breweries, or exit to quit."
       input = gets.strip.downcase
 
-      if input.to_i > 0
+      if input.to_i > 0 && input.to_i <= @beers.length
         beer = @beers[input.to_i - 1]
         if beer.description.nil?
           TopBeers::Scraper.scrape_details(beer)
@@ -70,11 +70,33 @@ class TopBeers::CLI
       puts "Enter the number of the brewery you want to see the list of beers for.\nType list to see the list again, or exit to return to the main menu."
       input = gets.strip.downcase
 
-      if input.to_i > 0
+      if input.to_i > 0 && input.to_i <= @breweries.length
         brewery = @breweries[input.to_i - 1]
         brewery.show_beers
+        brewery_details_menu(brewery)
       elsif input == "list"
         list_breweries
+      elsif input == "exit"
+      else
+        puts "Not sure what you want. Type list or exit."
+      end
+    end
+  end
+
+  def brewery_details_menu(brewery)
+    input = nil
+    while input != "exit"
+      puts "Enter the number of the beer you want to see the list of beers for.\nType list to see the list again, or exit to return to the breweries menu."
+      input = gets.strip.downcase
+
+      if input.to_i > 0 && input.to_i <= brewery.beers.length
+        beer = brewery.beers[input.to_i - 1]
+        if beer.description.nil?
+          TopBeers::Scraper.scrape_details(beer)
+        end
+        display_beer_detail(beer)
+      elsif input == "list"
+        brewery.show_beers
       elsif input == "exit"
       else
         puts "Not sure what you want. Type list or exit."

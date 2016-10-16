@@ -28,12 +28,19 @@ class TopBeers::Scraper
   def self.scrape_details(beer)
     doc = Nokogiri::HTML(open("https://www.beeradvocate.com"+beer.url))
     beer.ba_score = doc.search(".ba-score").text
-    beer.availability = doc.search(".break")[1].children[37].text.strip
-    beer.description = doc.search(".break")[1].children[44].text.gsub(/\n\t\t/, '')
 
-    if beer.brewery.location.nil?
-      beer.brewery.location = "#{doc.search('.break')[1].children[15].text}, #{doc.search(".break")[1].children[17].text}"
-      beer.brewery.website = "#{doc.search('.break')[1].children[19].text}"
+    if beer.brewery.location_1.nil?
+      beer.brewery.location_1 = "#{doc.search('.break')[1].children[15].text}"
+      if beer.brewery.location_1 == "Belgium"
+        beer.availability = doc.search(".break")[1].children[35].text.strip
+        beer.brewery.website = "#{doc.search(".break")[1].children[17].text}"
+        beer.description = doc.search(".break")[1].children[42].text.gsub(/\n\t\t/, '')
+      else
+        beer.availability = doc.search(".break")[1].children[37].text.strip
+        beer.description = doc.search(".break")[1].children[44].text.gsub(/\n\t\t/, '')
+        beer.brewery.location_2 = "#{doc.search(".break")[1].children[17].text}"
+        beer.brewery.website = "#{doc.search('.break')[1].children[19].text}"
+      end
     end
   end
 

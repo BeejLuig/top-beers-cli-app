@@ -1,5 +1,5 @@
 class TopBeers::Brewery
-  attr_accessor :location, :website, :beers
+  attr_accessor :location_1, :location_2, :website, :beers
   attr_reader :name
 
   @@all = []
@@ -23,6 +23,14 @@ class TopBeers::Brewery
       puts "#{i}. ".colorize(:light_yellow)+"#{beer.name} - #{beer.style}".colorize(:light_green)
     end
     puts "\n"
+  end
+
+  def location
+    if @location_2.nil?
+      "#{@location_1}"
+    else
+      "#{@location_1}, #{@location_2}"
+    end
   end
 
   def self.all
