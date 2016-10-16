@@ -12,4 +12,8 @@ class TopBeers::Beer
     @@all
   end
 
+  def brewery=(brewery)
+    @brewery = TopBeers::Brewery.find_or_create_by_name(brewery)
+    @brewery.beers << self
+  end
 end

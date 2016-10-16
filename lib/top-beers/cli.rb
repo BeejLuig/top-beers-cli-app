@@ -3,6 +3,7 @@ class TopBeers::CLI
 
   def call
     TopBeers::Scraper.scrape_beers
+    binding.pry
     list_beers
     menu
     goodbye
@@ -14,7 +15,7 @@ class TopBeers::CLI
     puts "#######################################".colorize(:yellow)
     @beers = TopBeers::Beer.all
     @beers.each.with_index(1) do |beer, i|
-      puts "#{i}.".colorize(:light_yellow)+"#{beer.name} #{beer.brewery} - #{beer.style}".colorize(:light_green)
+      puts "#{i}.".colorize(:light_yellow)+"#{beer.name} #{beer.brewery.name} - #{beer.style}".colorize(:light_green)
     end
     puts "\n"
   end

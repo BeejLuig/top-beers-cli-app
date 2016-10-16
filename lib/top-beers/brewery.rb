@@ -13,10 +13,9 @@ class TopBeers::Brewery
   def self.find_or_create_by_name(name)
     brewery = @@all.detect {|b| b.name.downcase == name.downcase}
     if brewery.nil?
-      self.new(name)
-    else
-      brewery
+      brewery = self.new(name)
     end
+    brewery
   end
 
   def self.all
