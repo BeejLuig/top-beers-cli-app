@@ -29,7 +29,6 @@ class TopBeers::Scraper
     doc = Nokogiri::HTML(open("https://www.beeradvocate.com"+beer.url))
     beer.ba_score = doc.search(".ba-score").text
 
-    if beer.brewery.location_1.nil?
       beer.brewery.location_1 = "#{doc.search('.break')[1].children[15].text}"
       if beer.brewery.location_1 == "Belgium"
         beer.availability = doc.search(".break")[1].children[35].text.strip
@@ -41,7 +40,6 @@ class TopBeers::Scraper
         beer.brewery.location_2 = "#{doc.search(".break")[1].children[17].text}"
         beer.brewery.website = "#{doc.search('.break')[1].children[19].text}"
       end
-    end
   end
 
 end

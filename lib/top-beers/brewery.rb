@@ -19,7 +19,7 @@ class TopBeers::Brewery
   end
 
   def show_beers
-    puts "-"*"#{@name}'s Beers in the Top 250".length
+    puts "\n"+"-"*"#{@name}'s Beers in the Top 250".length
     puts "#{@name}'s Beers in the Top 250"
     puts "-"*"#{@name}'s Beers in the Top 250".length
     @beers.each.with_index(1) do |beer, i|
