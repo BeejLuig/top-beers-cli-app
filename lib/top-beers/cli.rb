@@ -12,22 +12,22 @@ class TopBeers::CLI
   end
 
   def list_beers
-    puts "---------------------------------------".colorize(:yellow)
-    puts "Beer Advocate's Best Beers in the World".colorize(:light_yellow)
-    puts "---------------------------------------".colorize(:yellow)
+    puts "---------------------------------------"
+    puts "Beer Advocate's Best Beers in the World"
+    puts "---------------------------------------"
 
     if @beer_list_count > 25
       i = @beer_list_count - 1
       @beer_list_count = 1
       i.times do
         beer = @beers[beer_list_count - 1]
-        puts "#{@beer_list_count}. ".colorize(:light_yellow)+"#{beer.name} - #{beer.brewery.name} - #{beer.style}".colorize(:light_green)
+        puts "#{@beer_list_count}. #{beer.name} - #{beer.brewery.name} - #{beer.style}"
         @beer_list_count += 1
       end
     else
       25.times do
         beer = @beers[beer_list_count - 1]
-        puts "#{beer_list_count}. ".colorize(:light_yellow)+"#{beer.name} - #{beer.brewery.name} - #{beer.style}".colorize(:light_green)
+        puts "#{beer_list_count}. #{beer.name} - #{beer.brewery.name} - #{beer.style}"
         @beer_list_count += 1
       end
     end
@@ -39,7 +39,7 @@ class TopBeers::CLI
     else
       25.times do
         beer = @beers[beer_list_count - 1]
-        puts "#{beer_list_count}. ".colorize(:light_yellow)+"#{beer.name} - #{beer.brewery.name} - #{beer.style}".colorize(:light_green)
+        puts "#{beer_list_count}. #{beer.name} - #{beer.brewery.name} - #{beer.style}"
         @beer_list_count += 1
       end
     end
@@ -47,7 +47,7 @@ class TopBeers::CLI
 
   def list_breweries
     @breweries.each.with_index(1) do |brewery, i|
-      puts "#{i}. ".colorize(:light_yellow)+"#{brewery.name}".colorize(:light_green)
+      puts "#{i}. #{brewery.name}"
     end
     puts "\n"
   end
@@ -68,7 +68,7 @@ class TopBeers::CLI
   def menu
     input = nil
     while input != "exit"
-      puts "\nEnter the ".colorize(:light_yellow) + "number".colorize(:light_red) + " of the beer you want more information about.".colorize(:light_yellow) + "\nType " + "more".colorize(:light_red) + " to see more beers, " + "list".colorize(:light_red) + " to see the list from the top, " + "breweries".colorize(:light_red) + " for a list of breweries, or " + "exit".colorize(:light_red) + " to quit."
+      puts "\nEnter the " + "number".colorize(:light_red) + " of the beer you want more information about." + "\nType " + "more".colorize(:light_red) + " to see more beers, " + "list".colorize(:light_red) + " to see the list from the top, " + "breweries".colorize(:light_red) + " for a list of breweries, or " + "exit".colorize(:light_red) + " to quit."
       input = gets.strip.downcase
 
       if input.to_i > 0 && input.to_i <= @beers.length

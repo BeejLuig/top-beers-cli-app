@@ -128,3 +128,13 @@ beers.each.with_index do |beer, i|
     new_beer.style = beers[i].css("#extendedInfo a")[1].text
     new_beer.abv = beers[i].css("#extendedInfo").children[3].text[3, 10]
 ##
+
+##################################################
+TODO:
+-Cleanup interface
+-Take out color, or find a good place for it
+-Cleanup menu interactions
+-Check code to refactor
+
+-add 'menu' option from submenu
+-exit should quit from any menu
