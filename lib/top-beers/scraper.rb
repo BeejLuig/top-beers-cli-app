@@ -45,12 +45,3 @@ class TopBeers::Scraper
   end
 
 end
-
-#ba_score = doc.search(".ba-score").text
- #=> "100"
-
-# description = doc.search(".break")[1].children[44].text
-# availability = doc.search(".break")[1].children[37].text
-# location_1 = doc.search(".break")[1].children[15].text
-# location_2 = doc.search(".break")[1].children[17].text
-# brew_site = doc.search(".break")[1].children[19].text
