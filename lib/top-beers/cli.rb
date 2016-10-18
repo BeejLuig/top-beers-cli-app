@@ -8,7 +8,7 @@ class TopBeers::CLI
     @styles = TopBeers::Style.all
     @beer_list_count = 1
     list_beers
-    menu
+    beers_menu
   end
 
   def list_beers
@@ -85,7 +85,7 @@ class TopBeers::CLI
     puts "Description".underline + ": #{beer.description}"
   end
 
-  def menu
+  def beers_menu
     input = nil
     while input != "exit"
       puts "\nSelect a beer by " + "number".colorize(:light_red) + ", see " + "more".colorize(:light_red) + " beers, see the " + "list".colorize(:light_red) + " of beers again from the top, see a list of " + "breweries".colorize(:light_red) + " , see a list of " + "styles".colorize(:light_red) + ", or " + "exit".colorize(:light_red) + "."
@@ -107,6 +107,8 @@ class TopBeers::CLI
       elsif input == "styles"
         list_styles
         style_menu
+      elsif input == "help"
+        help
       elsif input == "exit"
         abort(goodbye)
       else
@@ -129,7 +131,7 @@ class TopBeers::CLI
         list_breweries
       elsif input == "menu"
         list_beers
-        menu
+        beers_menu
       elsif input == "exit"
         abort(goodbye)
       else
@@ -154,7 +156,7 @@ class TopBeers::CLI
         brewery.show_beers
       elsif input == "menu"
         list_beers
-        menu
+        beers_menu
       elsif input == "breweries"
         list_breweries
         brewery_menu
@@ -180,7 +182,7 @@ class TopBeers::CLI
         list_breweries
       elsif input == "menu"
         list_beers
-        menu
+        beers_menu
       elsif input == "exit"
         abort(goodbye)
       else
@@ -221,18 +223,18 @@ class TopBeers::CLI
     puts "\n-------------------------"
     puts "TopBeers List of Commands"
     puts "-------------------------"
-    puts "Menu selection:"
-    puts "beers".colorize(:light_red) " displays the list of top beers, 25 at a time, up to 250"
-    puts "breweries".colorize(:light_red) " displays the list breweries"
-    puts "beers".colorize(:light_red) " displays the list of top styles"
-    puts "\nFrom the Beers menu:"
-    puts "more".colorize(:light_red)+" lists 25 more beers"
-    puts "all".colorize(:light_red)+" lists all 250 beers"
-    puts "reset".colorize(:light_red)+" shows the top 25 beers"
-    puts "\nFrom any menu:"
-    puts "[number]".colorize(:light_red)+" selects an item with the corresponding number from the given menu"
-    puts "list".colorize(:light_red)+" displays the list of the current menu."
-    puts "exit".colorize(:light_red)+" leaves the application"
+    puts "Menu selection".underline + ":"
+    puts "beers".colorize(:light_red) + " displays the list of top beers, 25 at a time, up to 250"
+    puts "breweries".colorize(:light_red) + " displays the list of top breweries"
+    puts "beers".colorize(:light_red) + " displays the list of top styles"
+    puts "\nFrom the Beers menu".underline + ":"
+    puts "more".colorize(:light_red) + " lists 25 more beers from the current point in the list"
+    puts "all".colorize(:light_red) + " lists all 250 beers"
+    puts "reset".colorize(:light_red) + " shows the top 25 beers"
+    puts "\nFrom any menu".underline + ":"
+    puts "[number]".colorize(:light_red) + " selects an item with the corresponding number from the given menu"
+    puts "list".colorize(:light_red) + " displays the list of the current menu."
+    puts "exit".colorize(:light_red) + " leaves the application"
   end
 
   def goodbye
