@@ -20,13 +20,13 @@ class TopBeers::CLI
       @beer_list_count = 1
       i.times do
         beer = @beers[beer_list_count - 1]
-        puts "#{@beer_list_count}. #{beer.name} - #{beer.brewery.name} - #{beer.style}"
+        puts "#{@beer_list_count}. #{beer.name} - #{beer.brewery.name} - #{beer.style.name}"
         @beer_list_count += 1
       end
     else
       25.times do
         beer = @beers[beer_list_count - 1]
-        puts "#{beer_list_count}. #{beer.name} - #{beer.brewery.name} - #{beer.style}"
+        puts "#{beer_list_count}. #{beer.name} - #{beer.brewery.name} - #{beer.style.name}"
         @beer_list_count += 1
       end
     end
@@ -38,7 +38,7 @@ class TopBeers::CLI
     else
       25.times do
         beer = @beers[beer_list_count - 1]
-        puts "#{beer_list_count}. #{beer.name} - #{beer.brewery.name} - #{beer.style}"
+        puts "#{beer_list_count}. #{beer.name} - #{beer.brewery.name} - #{beer.style.name}"
         @beer_list_count += 1
       end
     end
@@ -61,7 +61,7 @@ class TopBeers::CLI
     puts "Brewed by".underline + ": #{beer.brewery.name}\n"
     puts "Location".underline + ": #{beer.brewery.location}"
     puts "Website".underline + ": #{beer.brewery.website}"
-    puts "Style".underline + ": #{beer.style} \n"
+    puts "Style".underline + ": #{beer.style.name} \n"
     puts "Alcohol by volume (ABV)".underline + ": #{beer.abv} \n"
     puts "Beer Advocate Score".underline + ": #{beer.ba_score} \n"
     puts "Availability".underline + ": #{beer.availability} \n"
