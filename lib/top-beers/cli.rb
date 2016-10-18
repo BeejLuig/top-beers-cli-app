@@ -66,9 +66,9 @@ class TopBeers::CLI
   end
 
   def display_beer_detail(beer)
-    puts "-"*(beer.name.length + 3)
+    puts "-"*"#{@beers.index(beer)+1}".length+"-"*"#{beer.name}".length+"--"
     puts "#{@beers.index(beer)+1}. #{beer.name} \n"
-    puts "-"*(beer.name.length + 3)
+    puts "-"*"#{@beers.index(beer)+1}".length+"-"*"#{beer.name}".length+"--"
     puts "Brewed by".underline + ": #{beer.brewery.name}\n"
     puts "Location".underline + ": #{beer.brewery.location}"
     puts "Website".underline + ": #{beer.brewery.website}"
@@ -189,14 +189,14 @@ class TopBeers::CLI
       puts "\nSelect a beer by " + "number".colorize(:light_red) + ", see the " + "list".colorize(:light_red) + " of beers again, see a list of " + "breweries".colorize(:light_red) + " again, return to the main " + "menu".colorize(:light_red) + ", or " + "exit".colorize(:light_red) + "."
       input = gets.strip.downcase
 
-      if input.to_i > 0 && input.to_i <= brewery.beers.length
-        beer = brewery.beers[input.to_i - 1]
+      if input.to_i > 0 && input.to_i <= style.beers.length
+        beer = style.beers[input.to_i - 1]
         if beer.description.nil?
           TopBeers::Scraper.scrape_details(beer)
         end
         display_beer_detail(beer)
       elsif input == "list"
-        brewery.show_beers
+        style.show_beers
       elsif input == "menu"
         list_beers
         menu

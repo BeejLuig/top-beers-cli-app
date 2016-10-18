@@ -131,10 +131,18 @@ beers.each.with_index do |beer, i|
 
 ##################################################
 TODO:
--Cleanup interface
--Take out color, or find a good place for it
--Cleanup menu interactions
--Check code to refactor
+- Change menu names: beers, breweries, styles
+Submenus = [brewery-name], [style-name]
+Refer to menu/submenu in interface directions
 
--add 'menu' option from submenu
--exit should quit from any menu
+Add help option and method
+
+beer.all and beer.reset methods
+
+sort brewery list and styles list alphabetically
+
+include brewery location/website in ...brewery details
+
+beer menu
+- breweries, beers, styles
+- [number], list, or exit
