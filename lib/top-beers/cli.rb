@@ -100,7 +100,7 @@ class TopBeers::CLI
         more_beers
       elsif input == "styles"
         list_styles
-        styles_menu
+        style_menu
       elsif input == "exit"
         abort(goodbye)
       else
