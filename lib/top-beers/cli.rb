@@ -71,7 +71,7 @@ class TopBeers::CLI
   def menu
     input = nil
     while input != "exit"
-      puts "\nSelect a beer by " + "number".colorize(:light_red) + ", see " + "more".colorize(:light_red) + " beers, see the " + "list".colorize(:light_red) + " of beers again from the top, see a list of " + "breweries".colorize(:light_red) + " , or " + "exit".colorize(:light_red) + "."
+      puts "\nSelect a beer by " + "number".colorize(:light_red) + ", see " + "more".colorize(:light_red) + " beers, see the " + "list".colorize(:light_red) + " of beers again from the top, see a list of " + "breweries".colorize(:light_red) + ", or " + "exit".colorize(:light_red) + "."
       input = gets.strip.downcase
 
       if input.to_i > 0 && input.to_i <= @beers.length
@@ -107,6 +107,8 @@ class TopBeers::CLI
         brewery_details_menu(brewery)
       elsif input == "list"
         list_breweries
+      elsif input == "menu"
+        menu
       elsif input == "exit"
         abort(goodbye)
       else
@@ -130,6 +132,8 @@ class TopBeers::CLI
         brewery_menu
       elsif input == "list"
         brewery.show_beers
+      elsif input == "menu"
+        menu
       elsif input == "exit"
         abort(goodbye)
       else
