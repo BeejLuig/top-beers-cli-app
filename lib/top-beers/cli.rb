@@ -97,22 +97,30 @@ class TopBeers::CLI
           TopBeers::Scraper.scrape_details(beer)
         end
         display_beer_detail(beer)
-      elsif input == "list"
-        list_beers
-      elsif input == "breweries"
-        list_breweries
-        brewery_menu
-      elsif input == "more"
-        more_beers
-      elsif input == "styles"
-        list_styles
-        style_menu
-      elsif input == "help"
-        help
-      elsif input == "exit"
-        abort(goodbye)
       else
-        puts "Not sure what you want. Type list or exit."
+        case input
+        when "list" || "beers"
+          list_beers
+        when "breweries"
+          list_breweries
+          brewery_menu
+        when "more"
+          more_beers
+        when "styles"
+          list_styles
+          style_menu
+        when "help"
+          help
+        when "all"
+          list_all_beers
+        when "reset"
+          reset_beer_counter
+          list_beers
+        when "exit"
+          abort(goodbye)
+        else
+          puts "Not sure what you want. Type list or exit."
+        end
       end
     end
   end
@@ -131,7 +139,7 @@ class TopBeers::CLI
         list_breweries
       elsif input == "menu"
         list_beers
-        beers_menu
+        beer_menu
       elsif input == "exit"
         abort(goodbye)
       else
@@ -156,7 +164,7 @@ class TopBeers::CLI
         brewery.show_beers
       elsif input == "menu"
         list_beers
-        beers_menu
+        beer_menu
       elsif input == "breweries"
         list_breweries
         brewery_menu
@@ -182,7 +190,7 @@ class TopBeers::CLI
         list_breweries
       elsif input == "menu"
         list_beers
-        beers_menu
+        beer_menu
       elsif input == "exit"
         abort(goodbye)
       else
