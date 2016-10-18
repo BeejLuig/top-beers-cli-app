@@ -33,6 +33,12 @@ class TopBeers::CLI
     end
   end
 
+  def list_all_beers
+    @beers.each.with_index(1) do |beer, i|
+      puts "#{i}. #{beer.name} - #{beer.brewery.name} - #{beer.style.name}"
+    end
+  end
+
   def more_beers
     if @beer_list_count >= @beers.length
       puts "There are no more beers to list"
@@ -209,6 +215,24 @@ class TopBeers::CLI
         puts "Not sure what you want. Type list or exit."
       end
     end
+  end
+
+  def help
+    puts "\n-------------------------"
+    puts "TopBeers List of Commands"
+    puts "-------------------------"
+    puts "Menu selection:"
+    puts "beers".colorize(:light_red) " displays the list of top beers, 25 at a time, up to 250"
+    puts "breweries".colorize(:light_red) " displays the list breweries"
+    puts "beers".colorize(:light_red) " displays the list of top styles"
+    puts "\nFrom the Beers menu:"
+    puts "more".colorize(:light_red)+" lists 25 more beers"
+    puts "all".colorize(:light_red)+" lists all 250 beers"
+    puts "reset".colorize(:light_red)+" shows the top 25 beers"
+    puts "\nFrom any menu:"
+    puts "[number]".colorize(:light_red)+" selects an item with the corresponding number from the given menu"
+    puts "list".colorize(:light_red)+" displays the list of the current menu."
+    puts "exit".colorize(:light_red)+" leaves the application"
   end
 
   def goodbye
