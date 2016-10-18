@@ -1,10 +1,11 @@
 class TopBeers::CLI
-  attr_accessor :beers, :breweries, :beer_list_count
+  attr_accessor :beers, :breweries, :beer_list_count, :styles
 
   def call
     TopBeers::Scraper.scrape_beers
     @beers = TopBeers::Beer.all
     @breweries = TopBeers::Brewery.all
+    @styles = TopBeers::Style.all
     @beer_list_count = 1
     list_beers
     menu
@@ -54,6 +55,16 @@ class TopBeers::CLI
     end
   end
 
+  def list_styles
+    puts "\n------------------------------------"
+    puts "Styles with the World's Top Beers"
+    puts "------------------------------------"
+    puts
+    @styles.each.with_index(1) do |style, i|
+      puts "#{i}. #{style.name}"
+    end
+  end
+
   def display_beer_detail(beer)
     puts "-"*(beer.name.length + 3)
     puts "#{@beers.index(beer)+1}. #{beer.name} \n"
@@ -71,7 +82,7 @@ class TopBeers::CLI
   def menu
     input = nil
     while input != "exit"
-      puts "\nSelect a beer by " + "number".colorize(:light_red) + ", see " + "more".colorize(:light_red) + " beers, see the " + "list".colorize(:light_red) + " of beers again from the top, see a list of " + "breweries".colorize(:light_red) + ", or " + "exit".colorize(:light_red) + "."
+      puts "\nSelect a beer by " + "number".colorize(:light_red) + ", see " + "more".colorize(:light_red) + " beers, see the " + "list".colorize(:light_red) + " of beers again from the top, see a list of " + "breweries".colorize(:light_red) + " , see a list of " + "styles".colorize(:light_red) + ", or " + "exit".colorize(:light_red) + "."
       input = gets.strip.downcase
 
       if input.to_i > 0 && input.to_i <= @beers.length
@@ -87,6 +98,9 @@ class TopBeers::CLI
         brewery_menu
       elsif input == "more"
         more_beers
+      elsif input == "styles"
+        list_styles
+        styles_menu
       elsif input == "exit"
         abort(goodbye)
       else
@@ -119,6 +133,57 @@ class TopBeers::CLI
   end
 
   def brewery_details_menu(brewery)
+    input = nil
+    while input != "exit"
+      puts "\nSelect a beer by " + "number".colorize(:light_red) + ", see the " + "list".colorize(:light_red) + " of beers again, see a list of " + "breweries".colorize(:light_red) + " again, return to the main " + "menu".colorize(:light_red) + ", or " + "exit".colorize(:light_red) + "."
+      input = gets.strip.downcase
+
+      if input.to_i > 0 && input.to_i <= brewery.beers.length
+        beer = brewery.beers[input.to_i - 1]
+        if beer.description.nil?
+          TopBeers::Scraper.scrape_details(beer)
+        end
+        display_beer_detail(beer)
+      elsif input == "list"
+        brewery.show_beers
+      elsif input == "menu"
+        list_beers
+        menu
+      elsif input == "breweries"
+        list_breweries
+        brewery_menu
+      elsif input == "exit"
+        abort(goodbye)
+      else
+        puts "Not sure what you want. Type list or exit."
+      end
+    end
+  end
+
+  def style_menu #TODO: refactor for TopBeers::Style
+    input = nil
+    while input != "exit"
+      puts "\nSelect a style by " + "number".colorize(:light_red) + ", see the " + "list".colorize(:light_red) + " of styles again, return to the main " + "menu".colorize(:light_red) + ", or " + "exit".colorize(:light_red) + "."
+      input = gets.strip.downcase
+
+      if input.to_i > 0 && input.to_i <= @styles.length
+        style = @styles[input.to_i - 1]
+        style.show_beers
+        style_details_menu(style)
+      elsif input == "list"
+        list_breweries
+      elsif input == "menu"
+        list_beers
+        menu
+      elsif input == "exit"
+        abort(goodbye)
+      else
+        puts "Not sure what you want. Type list or exit."
+      end
+    end
+  end
+
+  def style_details_menu(style) #TODO: refactor for TopBeers::Style
     input = nil
     while input != "exit"
       puts "\nSelect a beer by " + "number".colorize(:light_red) + ", see the " + "list".colorize(:light_red) + " of beers again, see a list of " + "breweries".colorize(:light_red) + " again, return to the main " + "menu".colorize(:light_red) + ", or " + "exit".colorize(:light_red) + "."
