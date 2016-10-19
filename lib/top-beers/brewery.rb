@@ -28,7 +28,6 @@ class TopBeers::Brewery
     @beers.each.with_index(1) do |beer, i|
       puts "#{i}. #{beer.name} - #{beer.style.name}"
     end
-    puts "\n"
   end
 
   def location

@@ -25,7 +25,6 @@ class TopBeers::Style
     @beers.each.with_index(1) do |beer, i|
       puts "#{i}. #{beer.name}"
     end
-    puts "\n"
   end
 
   def self.all

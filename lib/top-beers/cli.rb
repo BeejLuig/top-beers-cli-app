@@ -72,7 +72,7 @@ class TopBeers::CLI
   end
 
   def display_beer_detail(beer)
-    puts "-"*"#{@beers.index(beer)+1}".length+"-"*"#{beer.name}".length+"--"
+    puts "\n-"*"#{@beers.index(beer)+1}".length+"-"*"#{beer.name}".length+"--"
     puts "#{@beers.index(beer)+1}. #{beer.name} \n"
     puts "-"*"#{@beers.index(beer)+1}".length+"-"*"#{beer.name}".length+"--"
     puts "Brewed by".underline + ": #{beer.brewery.name}\n"
@@ -137,7 +137,7 @@ class TopBeers::CLI
         brewery_details_menu(brewery)
       else
         case input
-        when "list"
+        when "list" || "breweries"
           list_breweries
         when "beers"
           list_beers
@@ -159,7 +159,7 @@ class TopBeers::CLI
   def brewery_details_menu(brewery)
     input = nil
     while input != "exit"
-      puts "[#{brewery.name} Menu]\nSelect a beer by " + "number".colorize(:light_red) + " or type " + "help".colorize(:light_red) + " for a full list of commands." + " Type " + "exit".colorize(:light_red) + " to quit."
+      puts "\n[#{brewery.name} Menu]\nSelect a beer by " + "number".colorize(:light_red) + " or type " + "help".colorize(:light_red) + " for a full list of commands." + " Type " + "exit".colorize(:light_red) + " to quit."
       input = gets.strip.downcase
 
       if input.to_i > 0 && input.to_i <= brewery.beers.length
@@ -172,7 +172,7 @@ class TopBeers::CLI
         case input
         when "list"
           brewery.show_beers
-        when "menu"
+        when "beers"
           list_beers
           beer_menu
         when "help"
@@ -195,22 +195,30 @@ class TopBeers::CLI
   def style_menu #TODO: refactor for TopBeers::Style
     input = nil
     while input != "exit"
-        puts "[Style Menu]\nSelect a style by " + "number".colorize(:light_red) + " or type " + "help".colorize(:light_red) + " for a full list of commands." + " Type " + "exit".colorize(:light_red) + " to quit."
+        puts "\n[Style Menu]\nSelect a style by " + "number".colorize(:light_red) + " or type " + "help".colorize(:light_red) + " for a full list of commands." + " Type " + "exit".colorize(:light_red) + " to quit."
       input = gets.strip.downcase
 
       if input.to_i > 0 && input.to_i <= @styles.length
         style = @styles[input.to_i - 1]
         style.show_beers
         style_details_menu(style)
-      elsif input == "list"
-        list_breweries
-      elsif input == "menu"
-        list_beers
-        beer_menu
-      elsif input == "exit"
-        abort(goodbye)
       else
-        puts "Not sure what you want. Type list or exit."
+        case input
+        when "list" || "styles"
+          list_styles
+        when "beers"
+          list_beers
+          beer_menu
+        when "breweries"
+          list_breweries
+          brewery_menu
+        when "help"
+          help
+        when "exit"
+          abort(goodbye)
+        else
+          puts "Not sure what you want. Type list or exit."
+        end
       end
     end
   end
@@ -218,7 +226,7 @@ class TopBeers::CLI
   def style_details_menu(style) #TODO: refactor for TopBeers::Style
     input = nil
     while input != "exit"
-      puts "\nSelect a beer by " + "number".colorize(:light_red) + ", see the " + "list".colorize(:light_red) + " of beers again, see a list of " + "breweries".colorize(:light_red) + " again, return to the main " + "menu".colorize(:light_red) + ", or " + "exit".colorize(:light_red) + "."
+      puts "\n[#{style.name} Menu]\nSelect a style by " + "number".colorize(:light_red) + " or type " + "help".colorize(:light_red) + " for a full list of commands." + " Type " + "exit".colorize(:light_red) + " to quit."
       input = gets.strip.downcase
 
       if input.to_i > 0 && input.to_i <= style.beers.length
@@ -227,18 +235,26 @@ class TopBeers::CLI
           TopBeers::Scraper.scrape_details(beer)
         end
         display_beer_detail(beer)
-      elsif input == "list"
-        style.show_beers
-      elsif input == "menu"
-        list_beers
-        menu
-      elsif input == "breweries"
-        list_breweries
-        brewery_menu
-      elsif input == "exit"
-        abort(goodbye)
       else
-        puts "Not sure what you want. Type list or exit."
+        case input
+        when "list"
+          style.show_beers
+        when "menu"
+          list_beers
+          menu
+        when "breweries"
+          list_breweries
+          brewery_menu
+        when "styles"
+          list_styles
+          style_menu
+        when "help"
+          help
+        when "exit"
+          abort(goodbye)
+        else
+          puts "Not sure what you want. Type list or exit."
+        end
       end
     end
   end
