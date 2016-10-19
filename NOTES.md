@@ -131,18 +131,3 @@ beers.each.with_index do |beer, i|
 
 ##################################################
 TODO:
-- Change menu names: beers, breweries, styles
-Submenus = [brewery-name], [style-name]
-Refer to menu/submenu in interface directions
-
-Add help option and method
-
-beer.all and beer.reset methods
-
-sort brewery list and styles list alphabetically
-
-include brewery location/website in ...brewery details
-
-beer menu
-- breweries, beers, styles
-- [number], list, or exit

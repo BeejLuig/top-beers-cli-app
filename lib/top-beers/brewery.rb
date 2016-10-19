@@ -22,6 +22,9 @@ class TopBeers::Brewery
     puts "\n"+"-"*"#{@name}".length
     puts "#{@name}"
     puts "-"*"#{@name}".length
+    if @website.nil?
+      TopBeers::Scraper.scrape_details(@beers[0])
+    end
     puts "Location".underline + ": #{self.location}"
     puts "Website".underline + ": #{@website}"
     puts "Beers in the top 250".underline + ":"

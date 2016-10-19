@@ -11,6 +11,9 @@ class TopBeers::CLI
     beer_menu
   end
 
+  def reset_beer_counter
+    @beer_list_count = 1
+  end
   def list_beers
     puts "\n---------------------------------------"
     puts "Beer Advocate's Best Beers in the World"
@@ -119,7 +122,7 @@ class TopBeers::CLI
         when "exit"
           abort(goodbye)
         else
-          puts "Not sure what you want. Type list or exit."
+          puts "\nNot sure what you want. Type " + "help".colorize(:light_red) + " for a full list of commands"
         end
       end
     end
@@ -150,7 +153,7 @@ class TopBeers::CLI
         when "exit"
           abort(goodbye)
         else
-          puts "Not sure what you want. Type list or exit."
+          puts "\nNot sure what you want. Type " + "help".colorize(:light_red) + " for a full list of commands"
         end
       end
     end
@@ -186,7 +189,7 @@ class TopBeers::CLI
         when "exit"
           abort(goodbye)
         else
-          puts "Not sure what you want. Type list or exit."
+          puts "\nNot sure what you want. Type " + "help".colorize(:light_red) + " for a full list of commands"
         end
       end
     end
@@ -217,7 +220,7 @@ class TopBeers::CLI
         when "exit"
           abort(goodbye)
         else
-          puts "Not sure what you want. Type list or exit."
+          puts "\nNot sure what you want. Type " + "help".colorize(:light_red) + " for a full list of commands"
         end
       end
     end
@@ -253,7 +256,7 @@ class TopBeers::CLI
         when "exit"
           abort(goodbye)
         else
-          puts "Not sure what you want. Type list or exit."
+          puts "\nNot sure what you want. Type " + "help".colorize(:light_red) + " for a full list of commands"
         end
       end
     end
