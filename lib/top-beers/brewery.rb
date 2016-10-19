@@ -19,9 +19,12 @@ class TopBeers::Brewery
   end
 
   def show_beers
-    puts "\n"+"-"*"#{@name}'s Beers in the Top 250".length
-    puts "#{@name}'s Beers in the Top 250"
-    puts "-"*"#{@name}'s Beers in the Top 250".length
+    puts "\n"+"-"*"#{@name}".length
+    puts "#{@name}"
+    puts "-"*"#{@name}".length
+    puts "Location".underline + ": #{self.location}"
+    puts "Website".underline + ": #{@website}"
+    puts "Beers in the top 250".underline + ":"
     @beers.each.with_index(1) do |beer, i|
       puts "#{i}. #{beer.name} - #{beer.style.name}"
     end
@@ -37,6 +40,6 @@ class TopBeers::Brewery
   end
 
   def self.all
-    @@all
+    @@all.sort_by! { |e| e.name }
   end
 end

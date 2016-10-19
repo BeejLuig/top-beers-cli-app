@@ -19,16 +19,16 @@ class TopBeers::Style
   end
 
   def show_beers
-    puts "\n"+"-"*"#{@name}'s Beers in the Top 250".length
-    puts "#{@name}'s Beers in the Top 250"
-    puts "-"*"#{@name}'s Beers in the Top 250".length
+    puts "\n"+"-"*"#{@name}".length
+    puts "#{@name}"
+    puts "-"*"#{@name}".length
     @beers.each.with_index(1) do |beer, i|
-      puts "#{i}. #{beer.name} - #{beer.style.name}"
+      puts "#{i}. #{beer.name}"
     end
     puts "\n"
   end
 
   def self.all
-    @@all
+    @@all.sort_by! {|e| e.name}
   end
 end

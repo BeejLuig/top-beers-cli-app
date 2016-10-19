@@ -8,7 +8,7 @@ class TopBeers::CLI
     @styles = TopBeers::Style.all
     @beer_list_count = 1
     list_beers
-    beers_menu
+    beer_menu
   end
 
   def list_beers
@@ -85,10 +85,10 @@ class TopBeers::CLI
     puts "Description".underline + ": #{beer.description}"
   end
 
-  def beers_menu
+  def beer_menu
     input = nil
     while input != "exit"
-      puts "\nSelect a beer by " + "number".colorize(:light_red) + ", see " + "more".colorize(:light_red) + " beers, see the " + "list".colorize(:light_red) + " of beers again from the top, see a list of " + "breweries".colorize(:light_red) + " , see a list of " + "styles".colorize(:light_red) + ", or " + "exit".colorize(:light_red) + "."
+      puts "\n[Beer Menu]\nSelect a beer by " + "number".colorize(:light_red) + ", see " + "more".colorize(:light_red) + " beers, or type " + "help".colorize(:light_red) + " for a full list of commands." + " Type " + "exit".colorize(:light_red) + " to quit."
       input = gets.strip.downcase
 
       if input.to_i > 0 && input.to_i <= @beers.length
@@ -128,22 +128,30 @@ class TopBeers::CLI
   def brewery_menu
     input = nil
     while input != "exit"
-      puts "\nSelect a brewery by " + "number".colorize(:light_red) + ", see the " + "list".colorize(:light_red) + " of breweries again, return to the main " + "menu".colorize(:light_red) + ", or " + "exit".colorize(:light_red) + "."
+      puts "\n[Brewery Menu]\nSelect a brewery by " + "number".colorize(:light_red) + " or type " + "help".colorize(:light_red) + " for a full list of commands." + " Type " + "exit".colorize(:light_red) + " to quit."
       input = gets.strip.downcase
 
       if input.to_i > 0 && input.to_i <= @breweries.length
         brewery = @breweries[input.to_i - 1]
         brewery.show_beers
         brewery_details_menu(brewery)
-      elsif input == "list"
-        list_breweries
-      elsif input == "menu"
-        list_beers
-        beer_menu
-      elsif input == "exit"
-        abort(goodbye)
       else
-        puts "Not sure what you want. Type list or exit."
+        case input
+        when "list"
+          list_breweries
+        when "beers"
+          list_beers
+          beer_menu
+        when "styles"
+          list_styles
+          style_menu
+        when "help"
+          help
+        when "exit"
+          abort(goodbye)
+        else
+          puts "Not sure what you want. Type list or exit."
+        end
       end
     end
   end
@@ -151,7 +159,7 @@ class TopBeers::CLI
   def brewery_details_menu(brewery)
     input = nil
     while input != "exit"
-      puts "\nSelect a beer by " + "number".colorize(:light_red) + ", see the " + "list".colorize(:light_red) + " of beers again, see a list of " + "breweries".colorize(:light_red) + " again, return to the main " + "menu".colorize(:light_red) + ", or " + "exit".colorize(:light_red) + "."
+      puts "[#{brewery.name} Menu]\nSelect a beer by " + "number".colorize(:light_red) + " or type " + "help".colorize(:light_red) + " for a full list of commands." + " Type " + "exit".colorize(:light_red) + " to quit."
       input = gets.strip.downcase
 
       if input.to_i > 0 && input.to_i <= brewery.beers.length
@@ -160,18 +168,26 @@ class TopBeers::CLI
           TopBeers::Scraper.scrape_details(beer)
         end
         display_beer_detail(beer)
-      elsif input == "list"
-        brewery.show_beers
-      elsif input == "menu"
-        list_beers
-        beer_menu
-      elsif input == "breweries"
-        list_breweries
-        brewery_menu
-      elsif input == "exit"
-        abort(goodbye)
       else
-        puts "Not sure what you want. Type list or exit."
+        case input
+        when "list"
+          brewery.show_beers
+        when "menu"
+          list_beers
+          beer_menu
+        when "help"
+          help
+        when "styles"
+          list_styles
+          style_menu
+        when "breweries"
+          list_breweries
+          brewery_menu
+        when "exit"
+          abort(goodbye)
+        else
+          puts "Not sure what you want. Type list or exit."
+        end
       end
     end
   end
@@ -179,7 +195,7 @@ class TopBeers::CLI
   def style_menu #TODO: refactor for TopBeers::Style
     input = nil
     while input != "exit"
-      puts "\nSelect a style by " + "number".colorize(:light_red) + ", see the " + "list".colorize(:light_red) + " of styles again, return to the main " + "menu".colorize(:light_red) + ", or " + "exit".colorize(:light_red) + "."
+        puts "[Style Menu]\nSelect a style by " + "number".colorize(:light_red) + " or type " + "help".colorize(:light_red) + " for a full list of commands." + " Type " + "exit".colorize(:light_red) + " to quit."
       input = gets.strip.downcase
 
       if input.to_i > 0 && input.to_i <= @styles.length
@@ -234,14 +250,14 @@ class TopBeers::CLI
     puts "Menu selection".underline + ":"
     puts "beers".colorize(:light_red) + " displays the list of top beers, 25 at a time, up to 250"
     puts "breweries".colorize(:light_red) + " displays the list of top breweries"
-    puts "beers".colorize(:light_red) + " displays the list of top styles"
+    puts "styles".colorize(:light_red) + " displays the list of top styles"
     puts "\nFrom the Beers menu".underline + ":"
     puts "more".colorize(:light_red) + " lists 25 more beers from the current point in the list"
     puts "all".colorize(:light_red) + " lists all 250 beers"
     puts "reset".colorize(:light_red) + " shows the top 25 beers"
     puts "\nFrom any menu".underline + ":"
-    puts "[number]".colorize(:light_red) + " selects an item with the corresponding number from the given menu"
-    puts "list".colorize(:light_red) + " displays the list of the current menu."
+    puts "[number]".colorize(:light_red) + " selects an item with the corresponding number from the current menu"
+    puts "list".colorize(:light_red) + " displays the list of the current menu again"
     puts "exit".colorize(:light_red) + " leaves the application"
   end
 
