@@ -23,7 +23,7 @@ class TopBeers::Style
     puts "#{@name}"
     puts "-"*"#{@name}".length
     @beers.each.with_index(1) do |beer, i|
-      puts "#{i}. #{beer.name}"
+      puts "#{i}. #{beer.name} - #{beer.brewery.name}"
     end
   end
 

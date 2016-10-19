@@ -75,7 +75,8 @@ class TopBeers::CLI
   end
 
   def display_beer_detail(beer)
-    puts "\n-"*"#{@beers.index(beer)+1}".length+"-"*"#{beer.name}".length+"--"
+    puts "\n"
+    puts "-"*"#{@beers.index(beer)+1}".length+"-"*"#{beer.name}".length+"--"
     puts "#{@beers.index(beer)+1}. #{beer.name} \n"
     puts "-"*"#{@beers.index(beer)+1}".length+"-"*"#{beer.name}".length+"--"
     puts "Brewed by".underline + ": #{beer.brewery.name}\n"
@@ -102,7 +103,9 @@ class TopBeers::CLI
         display_beer_detail(beer)
       else
         case input
-        when "list" || "beers"
+        when "list"
+          list_beers
+        when "beers"
           list_beers
         when "breweries"
           list_breweries
@@ -140,7 +143,9 @@ class TopBeers::CLI
         brewery_details_menu(brewery)
       else
         case input
-        when "list" || "breweries"
+        when "list"
+          list_breweries
+        when "breweries"
           list_breweries
         when "beers"
           list_beers
@@ -207,7 +212,9 @@ class TopBeers::CLI
         style_details_menu(style)
       else
         case input
-        when "list" || "styles"
+        when "list"
+          list_styles
+        when "styles"
           list_styles
         when "beers"
           list_beers
