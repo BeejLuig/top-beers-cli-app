@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'top-beers/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "top-beers"
+  spec.name          = "top-beers-cli-app"
   spec.version       = TopBeers::VERSION
   spec.authors       = ["BJ Cantlupe"]
   spec.email         = ["bjcantlupe@gmail.com"]
@@ -23,12 +23,12 @@ Gem::Specification.new do |spec|
       "public gem pushes."
   end
 
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
+  spec.files = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
   end
   spec.bindir        = "exe"
-  spec.executables   = "top-beers" #spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.executables   = ['top-beers']
+  spec.require_paths = ["lib/top-beers"]
 
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"
