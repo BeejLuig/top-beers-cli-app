@@ -249,9 +249,9 @@ class TopBeers::CLI
         case input
         when "list"
           style.show_beers
-        when "menu"
+        when "beers"
           list_beers
-          menu
+          beer_menu
         when "breweries"
           list_breweries
           brewery_menu
