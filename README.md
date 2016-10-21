@@ -1,6 +1,6 @@
 # TopBeers
 
-TopBeers CLI App, the place to go for information on the best beers in the world! This app scrapes from Beer Advocate's Top 250 beer list and provides detailed information that can be interacted with using the command line. 
+TopBeers CLI App, the place to go for information on the best beers in the world! This app scrapes from Beer Advocate's Top 250 beer list and provides detailed information that can be interacted with using the command line.
 
 ## Installation
 
@@ -20,7 +20,7 @@ There are two other menus accessible in the TopBeers app:
 'breweries' accesses all of the breweries with beers in the top 250 list
 'styles' accesses all of the styles represented in the top 250 list
 
-Selecting a single beer/brewery/style is always done by typing the accompanying number. 
+Selecting a single beer/brewery/style is always done by typing the accompanying number.
 
 Type 'help' from any menu to see the the complete list of commands
 

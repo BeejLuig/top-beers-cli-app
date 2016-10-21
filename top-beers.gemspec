@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["bjcantlupe@gmail.com"]
 
   spec.summary       = %q{A CLI app for the world's top beers}
-  spec.description   = %q{This app scrapes from Beer Advocates website to display the world's top 250 beers. The user can interact with the CLI to learn more information about each beer, including detailed descriptions, brewery information and ABV.}
+  spec.description   = %q{This app scrapes from Beer Advocates website to display the world's top 250 beers. The user can interact with the CLI to learn more information about each beer, including detailed descriptions, brewery information and ABV. After installing, use the command 'top-beers'}
   spec.homepage      = "https://github.com/BeejLuig/top-beers-cli-app"
   spec.license       = "MIT"
 
