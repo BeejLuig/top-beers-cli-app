@@ -28,12 +28,11 @@ Gem::Specification.new do |spec|
   end
   #spec.bindir        = "exe"
   spec.executables   = ['top-beers']
-  spec.require_paths = ["lib/top-beers"]
+  spec.require_paths = ["lib", "lib/top-beers"]
 
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-
-  spec.add_dependency "nokogiri", "~> 1.6.8"
-  spec.add_dependency "colorize", "~> 0.8"
+  spec.add_development_dependency 'nokogiri', '~> 1.6', '>= 1.6.8'
+  spec.add_development_dependency 'colorize', '~> 0.8'
 end
