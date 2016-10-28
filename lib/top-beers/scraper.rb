@@ -4,42 +4,50 @@ class TopBeers::Scraper
   def self.scrape_beers
     doc = Nokogiri::HTML(open("https://www.beeradvocate.com/lists/top/"))
     beers = doc.search(".hr_bottom_light[@align='left']")
-    self.create_beers(beers)
+    create_beers(beers)
     beers
   end
 
   def self.create_beers(beers)
     beers.pop
-    i = 0
-    beers.each do |beer|
-      if i.even?
-        new_beer = TopBeers::Beer.new(beer.css("b").text)
-        new_beer.url = beer.children[0].attributes['href'].value
-        new_beer.brewery = "#{beer.css("#extendedInfo a")[0].text}"
-        new_beer.style = beer.css("#extendedInfo a")[1].text
+    unique_beers = beers.select.with_index { |beer, i| i.even? }
+    unique_beers.each do |beer|
         if beer.css("#extendedInfo").children[3] != nil
-          new_beer.abv = beer.css("#extendedInfo").children[3].text[3, 10].chomp(" ABV")
+          abv = beer.css("#extendedInfo").children[3].text[3, 10].chomp(" ABV")
         end
-      end
-      i += 1
+        TopBeers::Beer.new({
+          name: beer.css("b").text,
+          url: beer.children[0].attributes['href'].value,
+          brewery: beer.css("#extendedInfo a")[0].text,
+          style: beer.css("#extendedInfo a")[1].text,
+          abv: abv
+        })
     end
   end
 
   def self.scrape_details(beer)
     doc = Nokogiri::HTML(open("https://www.beeradvocate.com"+beer.url))
-    beer.ba_score = doc.search(".ba-score").text
+    ba_score = doc.search('.ba-score').text
+    location_1 = "#{doc.search('.break')[1].children[15].text}"
 
-      beer.brewery.location_1 = "#{doc.search('.break')[1].children[15].text}"
-      if beer.brewery.location_1 == "Belgium"
-        beer.availability = doc.search(".break")[1].children[35].text.strip
-        beer.brewery.website = "#{doc.search(".break")[1].children[17].text}"
-        beer.description = doc.search(".break")[1].children[42].text.gsub(/\n\t\t/, '')
-      else
-        beer.availability = doc.search(".break")[1].children[37].text.strip
-        beer.description = doc.search(".break")[1].children[44].text.gsub(/\n\t\t/, '')
-        beer.brewery.location_2 = "#{doc.search(".break")[1].children[17].text}"
-        beer.brewery.website = "#{doc.search('.break')[1].children[19].text}"
-      end
+    if location_1 == "Belgium"
+      beer.update_beer_info({
+        ba_score: ba_score,
+        availability: doc.search('.break')[1].children[35].text.strip,
+        description: doc.search('.break')[1].children[42].text.gsub(/\n\t\t/, ''),
+        location_1: location_1,
+        website: doc.search('.break')[1].children[17].text
+        })
+    else
+      beer.update_beer_info({
+        ba_score: ba_score,
+        availability: doc.search('.break')[1].children[37].text.strip,
+        description: doc.search('.break')[1].children[44].text.gsub(/\n\t\t/, ''),
+        location_1: location_1,
+        location_2: doc.search(".break")[1].children[17].text,
+        website: doc.search('.break')[1].children[19].text
+        })
+    end
   end
 
 end

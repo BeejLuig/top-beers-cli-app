@@ -1,6 +1,5 @@
 class TopBeers::Style
-  attr_accessor :beers
-  attr_reader :name
+  attr_reader :name, :beers
 
   @@all = []
 

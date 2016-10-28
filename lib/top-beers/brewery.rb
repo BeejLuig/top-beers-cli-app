@@ -1,6 +1,6 @@
 class TopBeers::Brewery
-  attr_accessor :location_1, :location_2, :website, :beers
-  attr_reader :name
+  attr_accessor :location_1, :location_2, :website
+  attr_reader :name, :beers
 
   @@all = []
 

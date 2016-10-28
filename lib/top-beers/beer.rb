@@ -1,10 +1,16 @@
 class TopBeers::Beer
-  attr_accessor :name, :style, :abv, :brewery, :url, :ba_score, :availability, :description
+  attr_reader :name, :style, :abv, :brewery, :url, :ba_score, :availability, :description
 
   @@all = []
 
-  def initialize(name)
-    @name = name
+  def initialize(attributes = {})
+    @name = attributes[:name]
+    @url = attributes[:url]
+    @abv = attributes[:abv]
+    @style = TopBeers::Style.find_or_create_by_name(attributes[:style])
+    @brewery = TopBeers::Brewery.find_or_create_by_name(attributes[:brewery])
+    @style.beers << self
+    @brewery.beers << self
     @@all << self
   end
 
@@ -12,13 +18,13 @@ class TopBeers::Beer
     @@all
   end
 
-  def style=(style)
-    @style = TopBeers::Style.find_or_create_by_name(style)
-    @style.beers << self
+  def update_beer_info(attributes = {})
+    @ba_score = attributes[:ba_score]
+    @availability = attributes[:availability]
+    @description = attributes[:description]
+    @brewery.location_1 = attributes[:location_1]
+    @brewery.location_2 = attributes[:location_2]
+    @brewery.website = attributes[:website]
   end
 
-  def brewery=(brewery)
-    @brewery = TopBeers::Brewery.find_or_create_by_name(brewery)
-    @brewery.beers << self
-  end
 end

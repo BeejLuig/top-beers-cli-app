@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require "top-beers"
+require_relative "../lib/top-beers"
 
 TopBeers::CLI.new.call
